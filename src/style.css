@@ -1,0 +1,54 @@
+body {
+  text-align: center;
+  background: #defcf9;
+  font-family: "Lobster", cursive;
+  font-family: "PT Mono", monospace;
+  font-family: "Roboto Slab", serif;
+}
+
+.date-time {
+  font-size: 18pt;
+}
+
+.main-city-degree h1 {
+  font-size: 50pt;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.current-degree {
+  font-size: 35pt;
+  padding-bottom: 50px;
+  margin-bottom: 30px;
+}
+.main-city-high-low {
+  font-size: 18pt;
+}
+.big-icon {
+  font-size: 100pt;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.weather-icon {
+  font-size: 30pt;
+}
+.high-low {
+  color: rgb(50, 49, 49);
+}
+.bold {
+  font-weight: bold;
+}
+.footer {
+  font-size: 13pt;
+  padding-top: 30px;
+  margin-bottom: 0;
+}
+
+.unit {
+  text-decoration: none;
+  color: rgb(93, 91, 91);
+  cursor: pointer;
+}
+.big {
+  font-size: larger;
+  color: rgb(50, 49, 49);
+}

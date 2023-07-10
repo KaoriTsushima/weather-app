@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+
+    <script
+      src="https://kit.fontawesome.com/ab72afb5ff.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=PT+Mono&family=Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <input
+          type="text"
+          placeholder="Please type city"
+          autocomplete="off"
+          id="input-city"
+        />
+
+        <button type="button" class="btn btn-primary" id="change-city">
+          Change City
+        </button>
+        <button type="button" class="btn btn-success" id="current-location">
+          Current Location
+        </button>
+      </form>
+      <div class="row">
+        <div class="col">
+          <div class="date-time">
+            <p>
+              <span class="date" id="current-date"> Wed 5 Jul 2023</span>
+              <br />
+              <span class="time" id="current-time">13:20:00</span>
+            </p>
+          </div>
+          <div class="main-city-degree">
+            <h1 id="main-city-name">Glasgow</h1>
+            <br />
+            <h2>
+              <span class="current-degree" id="temp">17</span>
+              <a id="cTemp" class="unit big">℃</a>
+              /
+              <a id="fTemp" class="unit">F</a>
+            </h2>
+            <h3><span class="main-city-high-low">H:17° L:8°</span></h3>
+          </div>
+        </div>
+        <div class="col">
+          <span class="big-icon" id="main-weather-icon"
+            ><i class="fa-solid fa-cloud"></i
+          ></span>
+          <h4 id="main-weather">Cloudy</h4>
+          <div class="humidity-wind">
+            <span id="humidity">Humidity: 57%</span>
+            <br />
+            <span id="wind">Wind: 10mph</span>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col">
+          <div class="date"><h5>Thu</h5></div>
+          <span class="weather-icon"><i class="fa-solid fa-cloud"></i></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+
+        <div class="col">
+          <div class="date"><h5>Fri</h5></div>
+          <span class="weather-icon"
+            ><i class="fa-solid fa-cloud-sun"></i
+          ></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+
+        <div class="col">
+          <div class="date"><h5>Sat</h5></div>
+          <span class="weather-icon"><i class="fa-solid fa-cloud"></i></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+
+        <div class="col">
+          <div class="date"><h5>Sun</h5></div>
+          <span class="weather-icon"><i class="fa-solid fa-sun"></i></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+
+        <div class="col">
+          <div class="date"><h5>Mon</h5></div>
+          <span class="weather-icon"
+            ><i class="fa-solid fa-cloud-showers-heavy"></i
+          ></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+        <div class="footer">coded by <em>Kaori Tsushima</em></div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
