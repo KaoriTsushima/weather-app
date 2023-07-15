@@ -37,36 +37,18 @@ function showTime() {
 let timenow = document.querySelector("#current-time");
 timenow.innerHTML = showTime();
 
-//change C to F, F to C
-let fakeTemp = 17;
-
-let cTempElement = document.querySelector("#cTemp");
-let fTempElement = document.querySelector("#fTemp");
-
-function changeToC() {
-  cTempElement.classList.add("big");
-  fTempElement.classList.remove("big");
-
-  let temp = document.querySelector("#temp");
-  temp.innerHTML = fakeTemp;
+function convertToF(t) {
+  return Math.round((t * 9) / 5 + 32);
 }
-
-function changeToF() {
-  cTempElement.classList.remove("big");
-  fTempElement.classList.add("big");
-
-  let temp = document.querySelector("#temp");
-  temp.innerHTML = Math.round((fakeTemp * 9) / 5 + 32);
-}
-
-cTempElement.addEventListener("click", changeToC);
-fTempElement.addEventListener("click", changeToF);
 
 //week5 homework
 let apiKey = "bf54175800a55e59e6c4d6461deeef12";
+let cTemp = 17;
+let fTemp = convertToF(cTemp);
 
 function updateWeather(response, cityName) {
-  let temp = Math.round(response.data.main.temp);
+  cTemp = Math.round(response.data.main.temp);
+  fTemp = convertToF(cTemp);
   let tempMin = Math.round(response.data.main.temp_min);
   let tempMax = Math.round(response.data.main.temp_max);
   let humidity = Math.round(response.data.main.humidity);
@@ -77,8 +59,9 @@ function updateWeather(response, cityName) {
 
   let currentCityName = document.querySelector("#main-city-name");
   currentCityName.innerHTML = `${location}`;
-  let currentTemp = document.querySelector("#temp");
-  currentTemp.innerHTML = `${temp}`;
+  // let currentTemp = document.querySelector("#temp");
+  // currentTemp.innerHTML = `${cTemp}`;
+  changeToC();
   let maxMinTemp = document.querySelector(".main-city-high-low");
   maxMinTemp.innerHTML = `H:${tempMax}° L:${tempMin}°`;
   let mainWeather = document.querySelector("#main-weather");
@@ -129,3 +112,27 @@ function changeCity() {
   axios.get(getLatLonUrl).then(changeCityInfo);
 }
 changeButton.addEventListener("click", changeCity);
+
+//change C to F, F to C
+//let fakeTemp = 17;
+
+let cTempElement = document.querySelector("#cTemp");
+let fTempElement = document.querySelector("#fTemp");
+
+function changeToC() {
+  cTempElement.classList.add("big");
+  fTempElement.classList.remove("big");
+  let temp = document.querySelector("#temp");
+  temp.innerHTML = cTemp;
+}
+
+function changeToF() {
+  cTempElement.classList.remove("big");
+  fTempElement.classList.add("big");
+
+  let temp = document.querySelector("#temp");
+  temp.innerHTML = fTemp;
+}
+
+cTempElement.addEventListener("click", changeToC);
+fTempElement.addEventListener("click", changeToF);
