@@ -1,6 +1,19 @@
 body {
   text-align: center;
+  background-image: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/088/759/original/sky.jpg?1688744696");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Lobster", cursive;
+  font-family: "PT Mono", monospace;
+  font-family: "Roboto Slab", serif;
+}
+.container {
+  text-align: center;
   background: #defcf9;
+  max-width: 600px;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
   font-family: "Lobster", cursive;
   font-family: "PT Mono", monospace;
   font-family: "Roboto Slab", serif;
@@ -38,9 +51,10 @@ body {
   font-weight: bold;
 }
 .footer {
-  font-size: 13pt;
-  padding-top: 30px;
+  font-size: 11pt;
+  margin-top: 5px;
   margin-bottom: 0;
+  background-color: rgba(222, 236, 249, 0.9);
 }
 
 .unit {
