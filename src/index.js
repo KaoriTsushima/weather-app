@@ -136,3 +136,25 @@ function changeToF() {
 
 cTempElement.addEventListener("click", changeToC);
 fTempElement.addEventListener("click", changeToF);
+
+// create forecast loop
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+<div class="col">
+          <div class="date"><h5>${day}</h5></div>
+          <span class="weather-icon"><i class="fa-solid fa-cloud"></i></span>
+          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+        </div>
+        `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
