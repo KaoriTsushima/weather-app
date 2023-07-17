@@ -86,6 +86,7 @@ function currentPosition(position) {
 }
 
 function currentCity(event) {
+  event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentPosition);
 }
 
@@ -106,7 +107,8 @@ function changeCityInfo(response) {
   }
   axios.get(apiUrl).then(updateWeatherAndCity);
 }
-function changeCity() {
+function changeCity(event) {
+  event.preventDefault();
   let city = searchCity.value;
   let getLatLonUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
   axios.get(getLatLonUrl).then(changeCityInfo);

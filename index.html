@@ -26,21 +26,25 @@
   </head>
   <body>
     <div class="container">
-      <form>
-        <input
-          type="text"
-          placeholder="Please type city"
-          autocomplete="off"
-          id="input-city"
-        />
+      <div class="d-flex flex-row justify-content-center gap-2">
+        <form>
+          <input
+            type="text"
+            placeholder="Please type city"
+            autocomplete="off"
+            id="input-city"
+          />
 
-        <button type="button" class="btn btn-primary" id="change-city">
-          Change City
-        </button>
-        <button type="button" class="btn btn-success" id="current-location">
-          Current Location
-        </button>
-      </form>
+          <button type="submit" class="btn btn-primary" id="change-city">
+            Change City
+          </button>
+        </form>
+        <form>
+          <button type="submit" class="btn btn-success" id="current-location">
+            Current Location
+          </button>
+        </form>
+      </div>
       <div class="row">
         <div class="col">
           <div class="date-time">
