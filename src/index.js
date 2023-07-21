@@ -1,9 +1,9 @@
 function currentDate() {
-  let current = new Date();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  let day = days[current.getDay()];
-  let date = current.getDate();
-  let months = [
+  const current = new Date();
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const day = days[current.getDay()];
+  const date = current.getDate();
+  const months = [
     "Jan",
     "Feb",
     "Mar",
@@ -17,70 +17,63 @@ function currentDate() {
     "Nov",
     "Dec",
   ];
-  let month = months[current.getMonth()];
-  let year = current.getFullYear();
-  let todayDate = `${day} ${date} ${month} ${year}`;
+  const month = months[current.getMonth()];
+  const year = current.getFullYear();
+  const todayDate = `${day} ${date} ${month} ${year}`;
   return todayDate;
 }
 
-let today = document.querySelector("#current-date");
+const today = document.querySelector("#current-date");
 today.innerHTML = currentDate();
 
 function showTime() {
-  let currentTime = new Date();
-  let hour = currentTime.getHours();
-  let minute = currentTime.getMinutes();
-  let second = currentTime.getSeconds();
-  let makeTime = `${hour}:${minute}:${second}`;
+  const currentTime = new Date();
+  const hour = currentTime.getHours();
+  const minute = currentTime.getMinutes();
+  const second = currentTime.getSeconds();
+  const makeTime = `${hour}:${minute}:${second}`;
   return makeTime;
 }
-let timenow = document.querySelector("#current-time");
+const timenow = document.querySelector("#current-time");
 timenow.innerHTML = showTime();
 
-function convertToF(t) {
-  return Math.round((t * 9) / 5 + 32);
-}
-
 //week5 homework
-let apiKey = "bf54175800a55e59e6c4d6461deeef12";
-let cTemp = 17;
-let fTemp = convertToF(cTemp);
+const apiKey = "bf54175800a55e59e6c4d6461deeef12";
 
 function updateWeather(response, cityName) {
-  cTemp = Math.round(response.data.main.temp);
-  fTemp = convertToF(cTemp);
-  let tempMin = Math.round(response.data.main.temp_min);
-  let tempMax = Math.round(response.data.main.temp_max);
-  let humidity = Math.round(response.data.main.humidity);
-  let wind = Math.round(response.data.wind.speed);
-  let weather = response.data.weather[0].main;
-  let weatherIcon = response.data.weather[0].icon;
-  let location = cityName || response.data.name;
+  const cTemp = Math.round(response.data.main.temp);
+  const tempMin = Math.round(response.data.main.temp_min);
+  const tempMax = Math.round(response.data.main.temp_max);
+  const humidity = Math.round(response.data.main.humidity);
+  const wind = Math.round(response.data.wind.speed);
+  const weather = response.data.weather[0].main;
+  const weatherIcon = response.data.weather[0].icon;
+  const location = cityName || response.data.name;
 
-  let currentCityName = document.querySelector("#main-city-name");
+  const currentCityName = document.querySelector("#main-city-name");
   currentCityName.innerHTML = `${location}`;
-  // let currentTemp = document.querySelector("#temp");
-  // currentTemp.innerHTML = `${cTemp}`;
-  changeToC();
-  let maxMinTemp = document.querySelector(".main-city-high-low");
+  const currentTemp = document.querySelector("#temp");
+  currentTemp.innerHTML = `${cTemp}`;
+
+  const maxMinTemp = document.querySelector(".main-city-high-low");
   maxMinTemp.innerHTML = `H:${tempMax}° L:${tempMin}°`;
-  let mainWeather = document.querySelector("#main-weather");
+  const mainWeather = document.querySelector("#main-weather");
   mainWeather.innerHTML = `${weather}`;
-  let currentHumidity = document.querySelector("#humidity");
+  const currentHumidity = document.querySelector("#humidity");
   currentHumidity.innerHTML = `Humidity: ${humidity}%`;
-  let windSpeed = document.querySelector("#wind");
+  const windSpeed = document.querySelector("#wind");
   windSpeed.innerHTML = `Wind: ${wind}mph`;
-  let weatherIconElement = document.querySelector("#main-weather-icon");
-  let iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+  const weatherIconElement = document.querySelector("#main-weather-icon");
+  const iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
   weatherIconElement.innerHTML = `
     <img height="200px" src="${iconUrl}"/>
     `;
 }
 
 function currentPosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(updateWeather);
 }
@@ -90,17 +83,17 @@ function currentCity(event) {
   navigator.geolocation.getCurrentPosition(currentPosition);
 }
 
-let currentLocationButton = document.querySelector("#current-location");
+const currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", currentCity);
 
-let searchCity = document.querySelector("#input-city");
-let changeButton = document.querySelector("#change-city");
+const searchCity = document.querySelector("#input-city");
+const changeButton = document.querySelector("#change-city");
 
 function changeCityInfo(response) {
-  let changeLat = response.data[0].lat;
-  let changeLon = response.data[0].lon;
-  let cityName = response.data[0].name;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${changeLat}&lon=${changeLon}&appid=${apiKey}&units=metric`;
+  const changeLat = response.data[0].lat;
+  const changeLon = response.data[0].lon;
+  const cityName = response.data[0].name;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${changeLat}&lon=${changeLon}&appid=${apiKey}&units=metric`;
 
   function updateWeatherAndCity(response) {
     updateWeather(response, cityName);
@@ -109,49 +102,25 @@ function changeCityInfo(response) {
 }
 function changeCity(event) {
   event.preventDefault();
-  let city = searchCity.value;
-  let getLatLonUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+  const city = searchCity.value;
+  const getLatLonUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
   axios.get(getLatLonUrl).then(changeCityInfo);
 }
 changeButton.addEventListener("click", changeCity);
 
-//change C to F, F to C
-//let fakeTemp = 17;
-
-let cTempElement = document.querySelector("#cTemp");
-let fTempElement = document.querySelector("#fTemp");
-
-function changeToC() {
-  cTempElement.classList.add("big");
-  fTempElement.classList.remove("big");
-  let temp = document.querySelector("#temp");
-  temp.innerHTML = cTemp;
-}
-
-function changeToF() {
-  cTempElement.classList.remove("big");
-  fTempElement.classList.add("big");
-
-  let temp = document.querySelector("#temp");
-  temp.innerHTML = fTemp;
-}
-
-cTempElement.addEventListener("click", changeToC);
-fTempElement.addEventListener("click", changeToF);
-
 // create forecast loop
 function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  const forecastElement = document.querySelector("#forecast");
+  const days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
   let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
       `
-<div class="col">
+        <div class="col">
           <div class="date"><h5>${day}</h5></div>
           <span class="weather-icon"><i class="fa-solid fa-cloud"></i></span>
-          <div class="higt-low"><span class="bold">H:18°</span> L:10°</div>
+          <div class="high-low"><span class="bold">H:18°</span> L:10°</div>
         </div>
         `;
   });

@@ -56,13 +56,3 @@ body {
   margin-bottom: 0;
   background-color: rgba(222, 236, 249, 0.9);
 }
-
-.unit {
-  text-decoration: none;
-  color: rgb(93, 91, 91);
-  cursor: pointer;
-}
-.big {
-  font-size: larger;
-  color: rgb(50, 49, 49);
-}
