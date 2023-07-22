@@ -39,7 +39,7 @@ function displayForecast(response) {
   const forecastElement = document.querySelector("#forecast");
   //const days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
   let forecastHTML = `<div class="row">`;
-  console.table(forecast.map((f) => f.condition.icon_url));
+
   forecast.forEach(function (forecastDay, index) {
     if (index > 0 && index < 6) {
       forecastHTML =
