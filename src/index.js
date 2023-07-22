@@ -34,22 +34,56 @@ function formatDay(timestamp) {
 const today = document.querySelector("#current-date");
 today.innerHTML = currentDate();
 
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  const forecastElement = document.querySelector("#forecast");
+  //const days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  let forecastHTML = `<div class="row">`;
+  console.table(forecast.map((f) => f.condition.icon_url));
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+         <div class="col">
+          <div class="date"><h5>${formatDay(forecastDay.time)}</h5></div>
+          <span class="weather-icon"><img src="${
+            forecastDay.condition.icon_url
+          }" /></span>
+          <div class="high-low"><span class="bold">H:${Math.round(
+            forecastDay.temperature.maximum
+          )}°</span> L:${Math.round(forecastDay.temperature.minimum)}°</div>
+        </div>
+        `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showTime() {
   const currentTime = new Date();
   const hour = currentTime.getHours();
   const minute = currentTime.getMinutes();
   const second = currentTime.getSeconds();
-  const makeTime = `${hour}:${minute}:${second}`;
-  return makeTime;
+  function padTime(time) {
+    return String(time).padStart(2, "0");
+  }
+  return `${padTime(hour)}:${padTime(minute)}:${padTime(second)}`;
 }
-const timenow = document.querySelector("#current-time");
-timenow.innerHTML = showTime();
+
+function updateTime() {
+  const timenow = document.querySelector("#current-time");
+  timenow.innerHTML = showTime();
+}
 
 //week5 homework
 //const apiKey = "bf54175800a55e59e6c4d6461deeef12";
 const apiKey = "9c350f182b3bcf281a5dbac65ff4ot92";
 
 function updateWeather(response, cityName) {
+  displayForecast(response);
   const cTemp = Math.round(response.data.daily[0].temperature.day);
   const tempMin = Math.round(response.data.daily[0].temperature.minimum);
   const tempMax = Math.round(response.data.daily[0].temperature.maximum);
@@ -82,12 +116,14 @@ function updateWeather(response, cityName) {
 function currentPosition(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  const apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}`;
+  const apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(updateWeather);
 }
 
 function currentCity(event) {
-  event.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
   navigator.geolocation.getCurrentPosition(currentPosition);
 }
 
@@ -116,27 +152,6 @@ function changeCity(event) {
 }
 changeButton.addEventListener("click", changeCity);
 
-// create forecast loop
-function displayForecast(response) {
-  //let forecast = response.data.daily;
-  const forecastElement = document.querySelector("#forecast");
-  const days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day, index) {
-    if (index > 0 && index < 6) {
-      forecastHTML =
-        forecastHTML +
-        `
-         <div class="col">
-          <div class="date"><h5>${day}</h5></div>
-          <span class="weather-icon"><i class="fa-solid fa-cloud"></i></span>
-          <div class="high-low"><span class="bold">H:18°</span> L:10°</div>
-        </div>
-        `;
-    }
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-displayForecast();
+currentCity();
+updateTime();
+setInterval(updateTime, 1000);
